@@ -1,8 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/on_the_air_tv_notifier.dart';
+import 'package:ditonton/presentation/bloc/on_the_air_tv/on_the_air_tv_bloc.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnTheAirTvPage extends StatefulWidget {
   static const routeName = '/on-the-air-tv';
@@ -17,12 +16,7 @@ class _OnTheAirTvPageState extends State<OnTheAirTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => Provider.of<OnTheAirTvNotifier>(
-        context,
-        listen: false,
-      ).fetchOnTheAirTv(),
-    );
+    context.read<OnTheAirTvBloc>().add(const OnTheAirTvRequested());
   }
 
   @override
@@ -31,22 +25,22 @@ class _OnTheAirTvPageState extends State<OnTheAirTvPage> {
       appBar: AppBar(title: Text('On The Air TV Series')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<OnTheAirTvNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
+        child: BlocBuilder<OnTheAirTvBloc, OnTheAirTvState>(
+          builder: (context, state) {
+            if (state is OnTheAirTvLoading) {
               return Center(child: CircularProgressIndicator());
-            } else if (data.state == RequestState.loaded) {
+            } else if (state is OnTheAirTvLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tv[index];
+                  final tv = state.tvSeries[index];
                   return TvCard(tv);
                 },
-                itemCount: data.tv.length,
+                itemCount: state.tvSeries.length,
               );
             } else {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state is OnTheAirTvError ? state.message : ''),
               );
             }
           },

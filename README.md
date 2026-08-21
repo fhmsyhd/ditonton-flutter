@@ -19,6 +19,44 @@ Untuk membuat APK:
 flutter build apk --dart-define=TMDB_API_KEY=YOUR_API_KEY
 ```
 
+## SSL Pinning
+
+Semua request API menggunakan `TmdbPinnedClient` dan hanya menerima koneksi
+HTTPS ke `api.themoviedb.org`. Trust store aplikasi hanya memuat sertifikat
+intermediate Amazon RSA 2048 M04 dari folder `assets/certificates/`.
+
+Sertifikat berlaku sampai 23 Agustus 2030. Periksa rantai sertifikat TMDB dan
+perbarui file PEM serta DER sebelum masa berlaku berakhir atau saat TMDB
+mengganti certificate authority.
+
+## Firebase Analytics dan Crashlytics
+
+Aplikasi Android dan iOS terhubung ke Firebase project `solve-ur-shape` dengan
+package/bundle ID `com.dicoding.ditonton`. Firebase diinisialisasi saat aplikasi
+dimulai, navigasi halaman dicatat oleh `FirebaseAnalyticsObserver`, dan error
+fatal Flutter maupun error asinkron yang tidak tertangani dikirim ke
+Crashlytics.
+
+Untuk memeriksa event secara langsung melalui Analytics DebugView di Android:
+
+```bash
+adb shell setprop debug.firebase.analytics.app com.dicoding.ditonton
+flutter run --dart-define=TMDB_API_KEY=YOUR_API_KEY
+```
+
+Untuk mengirim laporan uji Crashlytics, jalankan aplikasi dengan tombol uji
+khusus berikut:
+
+```bash
+flutter run \
+  --dart-define=TMDB_API_KEY=YOUR_API_KEY \
+  --dart-define=ENABLE_CRASHLYTICS_TEST=true
+```
+
+Buka halaman **About**, tekan **Test Crashlytics**, lalu jalankan kembali
+aplikasi agar laporan crash dikirim. Tombol tersebut tidak muncul pada
+penggunaan normal.
+
 ---
 
 ## Tips Submission Awal
