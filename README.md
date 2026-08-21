@@ -19,6 +19,16 @@ Untuk membuat APK:
 flutter build apk --dart-define=TMDB_API_KEY=YOUR_API_KEY
 ```
 
+## SSL Pinning
+
+Semua request API menggunakan `TmdbPinnedClient` dan hanya menerima koneksi
+HTTPS ke `api.themoviedb.org`. Trust store aplikasi hanya memuat sertifikat
+intermediate Amazon RSA 2048 M04 dari folder `assets/certificates/`.
+
+Sertifikat berlaku sampai 23 Agustus 2030. Periksa rantai sertifikat TMDB dan
+perbarui file PEM serta DER sebelum masa berlaku berakhir atau saat TMDB
+mengganti certificate authority.
+
 ---
 
 ## Tips Submission Awal

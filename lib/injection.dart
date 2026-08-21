@@ -46,7 +46,7 @@ import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+void init({required http.Client client}) {
   // bloc - movie
   locator.registerFactory(
     () => HomeMovieBloc(
@@ -152,5 +152,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton<http.Client>(() => client);
 }

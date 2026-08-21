@@ -1,6 +1,7 @@
 import 'package:ditonton/common/app_config.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
+import 'package:ditonton/common/ssl_pinning.dart';
 import 'package:ditonton/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/home_movie/home_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/home_tv/home_tv_bloc.dart';
@@ -33,9 +34,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ditonton/injection.dart' as di;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   AppConfig.validate();
-  di.init();
+  final pinnedClient = await SslPinning.createClient();
+  di.init(client: pinnedClient);
   runApp(const MyApp());
 }
 
