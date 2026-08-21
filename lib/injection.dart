@@ -37,9 +37,9 @@ import 'package:ditonton/presentation/bloc/on_the_air_tv/on_the_air_tv_bloc.dart
 import 'package:ditonton/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_search/tv_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
@@ -58,6 +58,7 @@ void init() {
   locator.registerFactory(() => PopularMoviesBloc(locator()));
   locator.registerFactory(() => TopRatedMoviesBloc(locator()));
   locator.registerFactory(() => MovieSearchBloc(locator()));
+  locator.registerFactory(() => WatchlistMovieBloc(locator()));
 
   // bloc - tv
   locator.registerFactory(
@@ -81,9 +82,6 @@ void init() {
       saveWatchlist: locator(),
       removeWatchlist: locator(),
     ),
-  );
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(getWatchlistMovies: locator()),
   );
 
   // provider - tv
