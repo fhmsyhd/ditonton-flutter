@@ -5,6 +5,7 @@ import 'package:ditonton/presentation/bloc/popular_movies/popular_movies_bloc.da
 import 'package:ditonton/presentation/bloc/home_movie/home_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/home_tv/home_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie_search/movie_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/on_the_air_tv/on_the_air_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
@@ -26,7 +27,6 @@ import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_tv_page.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<HomeMovieBloc>()),
         BlocProvider(create: (_) => di.locator<HomeTvBloc>()),
         BlocProvider(create: (_) => di.locator<MovieSearchBloc>()),
+        BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistMovieBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistTvBloc>()),
         BlocProvider(create: (_) => di.locator<TopRatedMoviesBloc>()),
@@ -58,9 +59,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<PopularTvBloc>()),
         BlocProvider(create: (_) => di.locator<TopRatedTvBloc>()),
         BlocProvider(create: (_) => di.locator<TvSearchBloc>()),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
         ChangeNotifierProvider(create: (_) => di.locator<TvDetailNotifier>()),
       ],
       child: MaterialApp(
