@@ -3,6 +3,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/popular_tv/popular_tv_bloc.dart';
+import 'package:ditonton/presentation/bloc/on_the_air_tv/on_the_air_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
@@ -22,7 +23,6 @@ import 'package:ditonton/presentation/pages/watchlist_tv_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/on_the_air_tv_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => di.locator<PopularMoviesBloc>()),
         BlocProvider(create: (_) => di.locator<TopRatedMoviesBloc>()),
+        BlocProvider(create: (_) => di.locator<OnTheAirTvBloc>()),
         BlocProvider(create: (_) => di.locator<PopularTvBloc>()),
         BlocProvider(create: (_) => di.locator<TopRatedTvBloc>()),
         ChangeNotifierProvider(create: (_) => di.locator<MovieListNotifier>()),
@@ -64,7 +65,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => di.locator<TvListNotifier>()),
         ChangeNotifierProvider(create: (_) => di.locator<TvDetailNotifier>()),
         ChangeNotifierProvider(create: (_) => di.locator<TvSearchNotifier>()),
-        ChangeNotifierProvider(create: (_) => di.locator<OnTheAirTvNotifier>()),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
