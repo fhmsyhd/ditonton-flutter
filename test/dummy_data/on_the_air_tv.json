@@ -1,0 +1,37 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/backdrop1.jpg",
+      "genre_ids": [18, 10765],
+      "id": 1399,
+      "origin_country": ["US"],
+      "original_language": "en",
+      "original_name": "Game of Thrones",
+      "overview": "Seven noble families fight for control of the mythical land of Westeros.",
+      "popularity": 369.594,
+      "poster_path": "/poster1.jpg",
+      "first_air_date": "2011-04-17",
+      "name": "Game of Thrones",
+      "vote_average": 8.4,
+      "vote_count": 11504
+    },
+    {
+      "backdrop_path": "/backdrop2.jpg",
+      "genre_ids": [18],
+      "id": 1402,
+      "origin_country": ["US"],
+      "original_language": "en",
+      "original_name": "The Walking Dead",
+      "overview": "Sheriff Deputy Rick Grimes wakes up from a coma.",
+      "popularity": 231.032,
+      "poster_path": "/poster2.jpg",
+      "first_air_date": "2010-10-31",
+      "name": "The Walking Dead",
+      "vote_average": 8.1,
+      "vote_count": 8543
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 2
+}

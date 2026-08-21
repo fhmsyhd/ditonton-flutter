@@ -1,0 +1,50 @@
+{
+  "backdrop_path": "/backdropDetail.jpg",
+  "created_by": [],
+  "episode_run_time": [55],
+  "first_air_date": "2011-04-17",
+  "genres": [
+    { "id": 18, "name": "Drama" },
+    { "id": 10765, "name": "Sci-Fi & Fantasy" }
+  ],
+  "homepage": "https://www.hbo.com/game-of-thrones",
+  "id": 1399,
+  "in_production": false,
+  "languages": ["en"],
+  "last_air_date": "2019-05-19",
+  "name": "Game of Thrones",
+  "next_episode_to_air": null,
+  "number_of_episodes": 73,
+  "number_of_seasons": 8,
+  "origin_country": ["US"],
+  "original_language": "en",
+  "original_name": "Game of Thrones",
+  "overview": "Seven noble families fight for control of the mythical land of Westeros.",
+  "popularity": 369.594,
+  "poster_path": "/posterDetail.jpg",
+  "seasons": [
+    {
+      "air_date": "2011-04-17",
+      "episode_count": 10,
+      "id": 3624,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/season1.jpg",
+      "season_number": 1
+    },
+    {
+      "air_date": "2012-04-01",
+      "episode_count": 10,
+      "id": 3625,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": "/season2.jpg",
+      "season_number": 2
+    }
+  ],
+  "status": "Ended",
+  "tagline": "Winter Is Coming",
+  "type": "Scripted",
+  "vote_average": 8.4,
+  "vote_count": 11504
+}
