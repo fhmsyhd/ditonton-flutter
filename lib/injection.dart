@@ -36,9 +36,9 @@ import 'package:ditonton/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/on_the_air_tv/on_the_air_tv_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_search/tv_search_bloc.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
@@ -70,6 +70,7 @@ void init() {
   locator.registerFactory(() => OnTheAirTvBloc(locator()));
   locator.registerFactory(() => PopularTvBloc(locator()));
   locator.registerFactory(() => TopRatedTvBloc(locator()));
+  locator.registerFactory(() => TvSearchBloc(locator()));
 
   // provider - movie
   locator.registerFactory(
@@ -95,7 +96,6 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(() => TvSearchNotifier(searchTv: locator()));
   locator.registerFactory(() => WatchlistTvNotifier(getWatchlistTv: locator()));
 
   // use case - movie

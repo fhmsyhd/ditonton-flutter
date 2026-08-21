@@ -1,9 +1,8 @@
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv_search/tv_search_bloc.dart';
 import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchTvPage extends StatelessWidget {
   static const routeName = '/search-tv';
@@ -22,10 +21,7 @@ class SearchTvPage extends StatelessWidget {
             TextField(
               key: Key('searchField'),
               onSubmitted: (query) {
-                Provider.of<TvSearchNotifier>(
-                  context,
-                  listen: false,
-                ).fetchTvSearch(query);
+                context.read<TvSearchBloc>().add(TvSearchSubmitted(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -36,20 +32,19 @@ class SearchTvPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text('Search Result', style: heading6),
-            Consumer<TvSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
+            BlocBuilder<TvSearchBloc, TvSearchState>(
+              builder: (context, state) {
+                if (state is TvSearchLoading) {
                   return Center(child: CircularProgressIndicator());
-                } else if (data.state == RequestState.loaded) {
-                  final result = data.searchResult;
+                } else if (state is TvSearchLoaded) {
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final tv = data.searchResult[index];
+                        final tv = state.tvSeries[index];
                         return TvCard(tv);
                       },
-                      itemCount: result.length,
+                      itemCount: state.tvSeries.length,
                     ),
                   );
                 } else {
