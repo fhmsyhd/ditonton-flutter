@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:ditonton/common/app_config.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/common/ssl_pinning.dart';
+import 'package:ditonton/firebase_options.dart';
 import 'package:ditonton/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/home_movie/home_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/home_tv/home_tv_bloc.dart';
@@ -33,17 +36,37 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  final analytics = FirebaseAnalytics.instance;
+  await analytics.setAnalyticsCollectionEnabled(true);
+  await analytics.logEvent(name: 'ditonton_app_started');
+
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   AppConfig.validate();
   final pinnedClient = await SslPinning.createClient();
   di.init(client: pinnedClient);
-  runApp(const MyApp());
+  runApp(
+    MyApp(analyticsObserver: FirebaseAnalyticsObserver(analytics: analytics)),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, this.analyticsObserver});
+
+  final NavigatorObserver? analyticsObserver;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +96,7 @@ class MyApp extends StatelessWidget {
           drawerTheme: drawerTheme,
         ),
         home: HomeMoviePage(),
-        navigatorObservers: [routeObserver],
+        navigatorObservers: [routeObserver, ?analyticsObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':

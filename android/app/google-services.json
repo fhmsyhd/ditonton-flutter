@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "564084185113",
+    "firebase_url": "https://solve-ur-shape-default-rtdb.firebaseio.com",
+    "project_id": "solve-ur-shape",
+    "storage_bucket": "solve-ur-shape.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564084185113:android:e9838d9697af0d05dab288",
+        "android_client_info": {
+          "package_name": "com.dicoding.ditonton"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqr4EctCfPXChcWSWNqEMYhuXbtLAGCDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564084185113:android:4c86cc0f238be7e4dab288",
+        "android_client_info": {
+          "package_name": "org.d3if4097.solveurshape"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqr4EctCfPXChcWSWNqEMYhuXbtLAGCDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
